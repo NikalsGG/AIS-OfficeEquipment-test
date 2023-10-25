@@ -17,7 +17,12 @@ namespace AccountingComputerEquipment.Controllers
         {
             return View();
         }
-
+        ////////////////////////////////////////////
+        public IActionResult TechEquipmentList()
+        {
+            return View("~/Views/Hardware/TechEquipmentList.cshtml");
+        }
+        ////////////////////////////////////////////
         public IActionResult Privacy()
         {
             return View();
