@@ -12,6 +12,16 @@
             <div class="card mb-4">
                 @*<img src="путь_к_изображению1.jpg" class="card-img-top" alt="Изображение 1">*@
                 <div class="card-body">
+                    <h5 class="card-title">Пользователи</h5>
+                    <p class="card-text">Просмотр списка всех пользователей компании</p>
+                    <a asp-controller="User" asp-action="Index" class="btn btn-primary">Перейти</a>
+                </div>
+                
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card mb-4">
+                <div class="card-body">
                     <h5 class="card-title">Оргтехника</h5>
                     <p class="card-text">Просмотр списка компьютерной техники и оргтехники</p>
                     <a asp-controller="Home" asp-action="TechEquipmentList" class="btn btn-primary">Перейти</a>
