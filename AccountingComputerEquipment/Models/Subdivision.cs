@@ -2,7 +2,7 @@
 {
     public class Subdivision
     {
-        public int Id { get; set; }
+        public int SubdivisionId { get; set; }
         public string SubdivisionName { get; set; }
     }
 }
