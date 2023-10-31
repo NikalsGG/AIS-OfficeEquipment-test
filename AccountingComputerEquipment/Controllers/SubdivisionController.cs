@@ -21,5 +21,19 @@ namespace AccountingComputerEquipment.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Subdivision subdivision) // POST
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Subdivisions.Add(subdivision);
+                _db.SaveChanges();
+                TempData["success"] = "Subdivision created successfully.";
+                return RedirectToAction("Index");
+            }
+            return View(subdivision);
+        }
     }
 }
