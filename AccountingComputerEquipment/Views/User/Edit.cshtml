@@ -1,187 +1,215 @@
 ﻿@model AccountingComputerEquipment.Models.EditUserViewModel
 
 @{
-    ViewBag.Title = "Редактировать пользователя";
+    ViewBag.Title = "Изменение пользователя";
 }
 
-<h2>Редактирование пользователя</h2>
+<style>
+    .form-columns {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .form-column {
+        width: 48%;
+    }
+
+    .form-separator {
+        border-top: 1px solid #ccc;
+        margin: 20px 0;
+        width: 100%;
+    }
+</style>
 
 @using (Html.BeginForm())
 {
     <fieldset>
-        @*<legend>Пользователь</legend>*@
-        @*<input type="hidden" asp-for="User.UserId">*@
-        @*<input asp-for="User.UserId" value="@Model.User.UserId">
+        <legend>Пользователь</legend>
+
+        
+    @*Пользовтель*@
+    <div class="form-columns">
+        
+        <div class="form-column">
+            <div hidden="hidden">
+                @Html.EditorFor(model => model.User.UserId)
+            </div>
+            <p>
+                ФИО <br/>
+                @Html.EditorFor(model => model.User.FullName)
+            </p>
+            <p>
+                Внутр. тел. <br/>
+                @Html.EditorFor(model => model.User.InternalPhone)
+            </p>
+            <p>
+                Email <br/>
+                @Html.EditorFor(model => model.User.Email)
+            </p>
+
+        </div>
+
+        <div class="form-column">
+            <p>
+                Позиция <br/>
+                @Html.DropDownListFor(model => model.User.PositionId, ViewBag.Positions as SelectList)
+            </p>
+            <p>
+                Подразделение <br/>
+                @Html.DropDownListFor(model => model.User.SubdivisionId, ViewBag.Subdivisions as SelectList)
+            </p>
+
+        </div>
+    </div>
+
+        <div class="form-separator"></div>
+
+        <legend>Компьютер</legend>
+
+        <div class="form-columns">
+            
+    @*Компьютер*@
+    <div class="form-column">
+        <div hidden="hidden">
+            @Html.EditorFor(model => model.Computer.ComputerId, new { @class = "form-control", type = "hidden" })
+            @Html.EditorFor(model => model.Computer.UserId, new { @class = "form-control", type = "hidden" })
+        </div>
         <p>
-            @Html.EditorFor(model => model.Computer.ComputerId)
-        </p>*@
-        <p>
-            ФИО <br />
-            @Html.EditorFor(model => model.User.FullName)
-        </p>
-        @*//*@
-        <p>
-            Внутр. тел. <br />
-            @Html.EditorFor(model => model.User.InternalPhone)
-        </p>
-        <p>
-            Email <br />
-            @Html.EditorFor(model => model.User.Email)
-        </p>
-        @*    <p>
-    Branch <br />
-    @Html.DropDownListFor(model => model.BranchId, ViewBag.Branchs as SelectList)
-    </p>*@
-        @*//*@
-        @*<p>
-    Email  <br />
-    @Html.EditorFor(model => model.Email)
-    </p>*@
-        <p>
-            Позиция <br />
-            @Html.DropDownListFor(model => model.User.PositionId, ViewBag.Positions as IEnumerable<SelectListItem>)
-        </p>
-        <p>
-            Подразделление <br />
-            @Html.DropDownListFor(model => model.User.SubdivisionId, ViewBag.Subdivisions as IEnumerable<SelectListItem>)
-        </p>
-        @*//*@
-        @*!!!*@
-        @*<p>
-    @Html.HiddenFor(model => model.Computer.ComputerId)
-    </p>*@
-        @*!!!*@
-        <p>
-            Инв. номер компьютера<br />
+            Инв. номер компьютера<br/>
             @Html.EditorFor(model => model.Computer.ComputerInventoryNumber)
         </p>
         <p>
-            Сер. номер компьютера<br />
+            Сер. номер компьютера<br/>
             @Html.EditorFor(model => model.Computer.ComputerSerialNumber)
         </p>
         <p>
-            Имя комьютера <br />
+            Имя комьютера <br/>
             @Html.EditorFor(model => model.Computer.ComputerName)
         </p>
         <p>
-            Имя пользователя<br />
+            Имя пользователя<br/>
             @Html.EditorFor(model => model.Computer.UserSystemName)
         </p>
         <p>
-            IP компьютера <br />
+            IP компьютера <br/>
             @Html.EditorFor(model => model.Computer.ComputerIp)
         </p>
         <p>
-            Процессор <br />
+            Процессор <br/>
             @Html.EditorFor(model => model.Computer.CPU)
         </p>
         <p>
-            Видеокарта <br />
+            Видеокарта <br/>
             @Html.EditorFor(model => model.Computer.GPU)
         </p>
         <p>
-            ОЗУ <br />
+            ОЗУ <br/>
             @Html.EditorFor(model => model.Computer.RAM)
         </p>
-        <p>
-            Материнская плата<br />
-            @Html.EditorFor(model => model.Computer.Motherboard)
-        </p>
-        <p>
-            Жёсткий диск<br />
-            @Html.EditorFor(model => model.Computer.HDD)
-        </p>
-        <p>
-            Сетевая карта<br />
-            @Html.EditorFor(model => model.Computer.LANCard)
-        </p>
-        <p>
-            DVD<br />
-            @Html.EditorFor(model => model.Computer.DVD)
-        </p>
-        <p>
-            Блок питания<br />
-            @Html.EditorFor(model => model.Computer.PSU)
-        </p>
-        <p>
-            Инв. номер принтера<br />
-            @Html.EditorFor(model => model.Computer.PrinterInventoryNumber)
-        </p>
-        <p>
-            Сер. номер принтера<br />
-            @Html.EditorFor(model => model.Computer.PrinterSerialNumber)
-        </p>
-        <p>
-            Имя принтера<br />
-            @Html.EditorFor(model => model.Computer.PrinterName)
-        </p>
-        <p>
-            IP принтера<br />
-            @Html.EditorFor(model => model.Computer.PrinterIp)
-        </p>
-        <p>
-            Тип принтера<br /> @*Сделай выпадающий список*@
-            @Html.EditorFor(model => model.Computer.PrinterType)
-            @*@Html.DropDownListFor(model => model.Computer., ViewBag.Subdivisions as SelectList)*@
-        </p>
-        <p>
-            Инв. номер монитора<br />
-            @Html.EditorFor(model => model.Computer.PCMonitorInventoryNumber)
-        </p>
-        <p>
-            Сер. номер монитора<br />
-            @Html.EditorFor(model => model.Computer.PCMonitorSerialNumber)
-        </p>
-        <p>
-            Имя монитора<br />
-            @Html.EditorFor(model => model.Computer.PCMonitorName)
-        </p>
-        <p>
-            Инв. номер планшета<br />
-            @Html.EditorFor(model => model.Computer.TabletInventoryNumber)
-        </p>
-        <p>
-            Сер. номер планшета<br />
-            @Html.EditorFor(model => model.Computer.TabletSerialNumber)
-        </p>
-        <p>
-            Имя планшета<br />
-            @Html.EditorFor(model => model.Computer.TabletName)
-        </p>
-        <p>
-            Инв. номер сервера<br />
-            @Html.EditorFor(model => model.Computer.ServerInventoryNumber)
-        </p>
-        <p>
-            Сер. номер сервера<br />
-            @Html.EditorFor(model => model.Computer.ServerSerialNumber)
-        </p>
-        <p>
-            Имя сервера<br />
-            @Html.EditorFor(model => model.Computer.ServerName)
-        </p>
-        <p>
-            IP сервера<br />
-            @Html.EditorFor(model => model.Computer.ServerIp)
-        </p>
-        <p>
-            ОС<br /> @*выпадающий список*@
-            @*@Html.DropDownListFor(model => model.Computer.UserOperatingSystemId, ViewBag.UserOperatingSystems as SelectList)*@
-        </p>
-        <p>
-            Приложения<br />
-            @Html.EditorFor(model => model.Computer.Softwares)
-        </p>
-        @*//*@
-        <a asp-controller="User" asp-action="EditComputer" asp-route-itemid="@Model.Computer.ComputerId" class="btn btn-primary mx-2 text-center">Изменить компьютер</a>
-        <form method="post">
-            <p>
-                <input type="submit" value="Изменить пользователя" />
-            </p>
-        </form>
+        <!-- Add other fields for this section -->
+    </div>
+            <div class="form-column">
+                <p>
+                    Материнская плата<br/>
+                    @Html.EditorFor(model => model.Computer.Motherboard)
+                </p>
+                <p>
+                    Жёсткий диск<br/>
+                    @Html.EditorFor(model => model.Computer.HDD)
+                </p>
+                <p>
+                    Сетевая карта<br/>
+                    @Html.EditorFor(model => model.Computer.LANCard)
+                </p>
+                <p>
+                    DVD<br/>
+                    @Html.EditorFor(model => model.Computer.DVD)
+                </p>
+                <p>
+                    Блок питания<br/>
+                    @Html.EditorFor(model => model.Computer.PSU)
+                </p>
+                <p>
+                    ОС<br/>
+                    @Html.DropDownListFor(model => model.Computer.UserOperatingSystemId, ViewBag.UserOperatingSystems as SelectList)
+                </p>
+                <p>
+                    Приложения<br/>
+                    @Html.EditorFor(model => model.Computer.Softwares)
+                </p>
+            </div>
+        </div>
 
+        <div class="form-separator"></div>
+
+        <div class="form-columns">
+            
+    @*Принтер*@
+            <div class="form-column">
+                <h3>Принтер</h3>
+                <p>
+                    Инв. номер принтера<br/>
+                    @Html.EditorFor(model => model.Computer.PrinterInventoryNumber)
+                </p>
+                <p>
+                    Сер. номер принтера<br/>
+                    @Html.EditorFor(model => model.Computer.PrinterSerialNumber)
+                </p>
+                <p>
+                    Имя принтера<br/>
+                    @Html.EditorFor(model => model.Computer.PrinterName)
+                </p>
+                <p>
+                    IP принтера<br/>
+                    @Html.EditorFor(model => model.Computer.PrinterIp)
+                </p>
+                <p>
+                    Тип принтера<br/>
+                    @Html.EditorFor(model => model.Computer.PrinterType)
+                </p>
+            </div>
+
+    @*Монитор*@
+            <div class="form-column">
+                <h3>Монитор</h3>
+                <p>
+                    Инв. номер монитора<br/>
+                    @Html.EditorFor(model => model.Computer.PCMonitorInventoryNumber)
+                </p>
+                <p>
+                    Сер. номер монитора<br/>
+                    @Html.EditorFor(model => model.Computer.PCMonitorSerialNumber)
+                </p>
+                <p>
+                    Имя монитора<br/>
+                    @Html.EditorFor(model => model.Computer.PCMonitorName)
+                </p>
+            </div>
+
+    @*Планшет*@
+            <div class="form-column">
+                <h3>Планшет</h3>
+                <p>
+                    Инв. номер планшета<br/>
+                    @Html.EditorFor(model => model.Computer.TabletInventoryNumber)
+                </p>
+                <p>
+                    Сер. номер планшета<br/>
+                    @Html.EditorFor(model => model.Computer.TabletSerialNumber)
+                </p>
+                <p>
+                    Имя планшета<br/>
+                    @Html.EditorFor(model => model.Computer.TabletName)
+                </p>
+            </div>
+        </div>
+
+        <p>
+            <input class="text-primary" type="submit" value="Изменить пользователя" />
+        </p>
     </fieldset>
 }
 <div>
-    @Html.ActionLink("Вернуться к списку пользователей", "Index")
+    @Html.ActionLink("К списку пользователей", "Index")
 </div>
