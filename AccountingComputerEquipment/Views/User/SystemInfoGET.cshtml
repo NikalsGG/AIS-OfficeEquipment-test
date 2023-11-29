@@ -1,0 +1,170 @@
+﻿@model HardwareViewModel
+
+@*@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.ErrorMessage
+    </div>
+}*@
+
+<h3 style="margin-bottom: 10px">Пользователь: @Model.User.FullName</h3>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card mb-6">
+                <div class="card-body">
+                    <h3 class="card-title text-center">
+                            Компьютер
+                        </h3>
+                    @if(Model.Computers.Any())
+                    {
+                        @foreach (var computer in Model.Computers)
+                        {
+                            <p class="card-text">
+                            <h4>Название компьютера</h4>
+                            @computer.ComputerName
+                            <h4>Процессор</h4>
+                            @computer.CPU
+                            <h4>Видеокарта</h4>
+                            @computer.GPU
+                            <h4>Оперативная память</h4>
+                            @computer.RAM
+                            <h4>Материнская плата</h4>
+                            @computer.Motherboard
+                            <h4>Накопитель</h4>
+                            @computer.HDD
+                            <h4>Сетевая карта</h4>
+                            @computer.LANCard
+                            <h4>DVD</h4>
+                            @computer.DVD
+                            <h4>Блок питания</h4>
+                            @computer.PSU
+                            <h4>ПО</h4>
+                            @computer.Softwares
+                        </p>
+                        }
+                        @foreach (var computer in Model.Computers)
+                        {
+                            <p class="card-text">
+                                <h4>Имя комьютера</h4>
+                                @computer.ComputerName
+                                <h4>Имя пользователя</h4>
+                                @computer.UserSystemName
+                                <h4>IP компьютера</h4>
+                                @computer.ComputerIp
+                            </p>
+                        }
+                        <h4>ОС</h4>
+                        @Model.UserOperatingSystem.UserOperatingSystemName
+
+                    }
+                    else
+                    {
+                        <p class ="card-text">Данные отсутстуют!</p>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card mb-6">
+                <div class="card-body">
+                    <h3 class="card-title text-center">
+                            Информация о системе
+                        </h3>
+                    @if(Model.Computers.Any())
+                    {
+                        @foreach (var computer in Model.Computers)
+                        {
+                            <p class="card-text">
+                            <h4>Имя комьютера</h4>
+                            @computer.ComputerName
+                            <h4>Имя пользователя</h4>
+                            @computer.UserSystemName
+                            <h4>IP компьютера</h4>
+                            @computer.ComputerIp
+                        </p>
+                        }
+                    }
+                    else
+                    {
+                        <p class="card-text">Данные отсутстуют!</p>
+                    }
+                </div>
+            </div>
+        </div>
+        @*<div class="col-md-3">
+            <div class="card mb-6">
+                <div class="card-body">
+                    <h3 class="card-title text-center">
+                        Software
+                    </h3>
+                    @if(Model.Computers.Any())
+                    {
+                        @foreach (var software in Model.Computers)
+                    {
+                        <p class="card-text">
+                            @software.Softwares
+                            <br />
+                        </p>
+                    }
+                    }
+                    else
+                    {
+                        <p class ="card-text">Данные отсутстуют!</p>
+                    }
+                </div>
+            </div>
+        </div>*@
+   @*     <div class="col-md-3">
+            <div class="card mb-6">
+                <div class="card-body">
+                    <h3 class="card-title text-center">
+                        Operating System
+                    </h3>
+                    @if(Model.UserOperatingSystem != null)
+                    {
+                        <p class="card-text">
+                        @Model.UserOperatingSystem.UserOperatingSystemName
+                        </p>
+                    }
+                    else
+                    {
+                        <p class ="card-text">Данные отсутстуют!</p>
+                    }
+                </div>
+            </div>
+        </div>*@
+        <div class="col-md-3">
+            <div class="card mb-6">
+                <div class="card-body">
+                    <h3 class="card-title text-center">
+                        Принтер
+                    </h3>
+                    @if(Model.Computers.Any())
+                    {
+                        <p class="card-text">
+                        @foreach(var printer in Model.Computers)
+                        {
+                            <h4>Имя принтер</h4>
+                            @printer.PrinterName
+                            <h4>Инвентарный номер</h4>
+                            @printer.PrinterInventoryNumber
+                            <h4>Серийный номер</h4>
+                            @printer.PrinterSerialNumber
+                            <h4>IP принетра</h4>
+                            @printer.PrinterIp
+                            <h5>Тип принтера</h5>
+                            @printer.PrinterType/*.ToFriendlyString()*/
+                        }
+                    </p>
+                    }
+                    else
+                    {
+                        <p class="card-text">Данные отсутствуют!</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

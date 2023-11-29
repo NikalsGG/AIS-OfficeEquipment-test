@@ -1,105 +1,103 @@
 ﻿using AccountingComputerEquipment.Data;
 using AccountingComputerEquipment.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Identity.Client;
 
 namespace AccountingComputerEquipment.Controllers
 {
-    public class SubdivisionController : Controller
+    public class PositionController : Controller
     {
         private readonly ApplicationDbContext _db;
-        public SubdivisionController(ApplicationDbContext db)
+        public PositionController(ApplicationDbContext db)
         {
             _db = db;
         }
 
         public IActionResult Index()
         {
-            IEnumerable<Subdivision> objSubdevisionList = _db.Subdivisions;
-            return View(objSubdevisionList);
+            IEnumerable<Position> objPositionList = _db.Positions;
+            return View(objPositionList);
         }
-        public IActionResult Create() // GET
+        public IActionResult Create()
         {
             return View();
         }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Subdivision subdivision) // POST
-        {
-            if (ModelState.IsValid)
-            {
-                _db.Subdivisions.Add(subdivision);
-                _db.SaveChanges();
-                TempData["success"] = "Subdivision created successfully.";
-                return RedirectToAction("Index");
-            }
-            return View(subdivision);
-        }
-
-        [HttpGet]
-        public IActionResult Edit(int? id)
-        {
-            if(id == null || id == null)
-            {
-                return NotFound();
-            }
-
-            var subdivisionFromDb = _db.Subdivisions.Find(id);
-
-            if(subdivisionFromDb == null)
-            {
-                return NotFound();
-            }
-
-            return View(subdivisionFromDb);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Edit(Subdivision subdivision)
+        public IActionResult Create(Position position)
         {
             if(ModelState.IsValid)
             {
-                _db.Subdivisions.Update(subdivision);
+                _db.Positions.Add(position);
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(subdivision);
+            return View(position);
+        }
+        [HttpGet]
+        public IActionResult Edit(int? id)
+        {
+            if (id == null || id == null)
+            {
+                return NotFound();
+            }
+
+            var positionFromDb = _db.Positions.Find(id);
+
+            if (positionFromDb == null)
+            {
+                return NotFound();
+            }
+
+            return View(positionFromDb);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(Position position)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Positions.Update(position);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(position);
         }
 
         [HttpGet]
         public IActionResult Delete(int? id)
         {
-            if(id == null || id == 0)
+            if (id == null || id == 0)
             {
                 return NotFound();
             }
 
-            var subdivisionFromDb = _db.Subdivisions.Find(id);
+            var positionFromDb = _db.Positions.Find(id);
 
-            if(subdivisionFromDb == null)
+            if (positionFromDb == null)
             {
                 return NotFound();
             }
 
-            return View(subdivisionFromDb);
+            return View(positionFromDb);
         }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeletePOST(int? id)
         {
-            var obj = _db.Subdivisions.Find(id);
+            var obj = _db.Positions.Find(id);
 
-            if(obj == null)
+            if (obj == null)
             {
                 return NotFound();
             }
 
-            _db.Subdivisions.Remove(obj);
+            _db.Positions.Remove(obj);
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+
     }
 }

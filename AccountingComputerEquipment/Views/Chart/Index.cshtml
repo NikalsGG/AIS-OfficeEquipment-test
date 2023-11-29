@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "Статистика";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card mb-4">
+                @*<img src="путь_к_изображению1.jpg" class="card-img-top" alt="Изображение 1">*@
+                <div class="card-body">
+                    <h5 class="card-title">Операционные системы</h5>
+                    <p class="card-text">Просмотр статистики об ОС в компании</p>
+                    <a asp-controller="Chart" asp-action="OSStatisticsChart" class="btn btn-primary">Перейти</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

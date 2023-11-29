@@ -1,0 +1,19 @@
+﻿@model UserOperatingSystem
+
+<form method="post">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Изменить операционную систему</h2>
+            <hr />
+        </div>
+        <div class="mb-3">
+            <input type="hidden" asp-for="UserOperatingSystemId"/>
+            <label asp-for="UserOperatingSystemName">Наименование операционной системы</label>
+            <input asp-for="UserOperatingSystemName" class="form-control" />
+            <span asp-validation-for="UserOperatingSystemName" class="text-danger"></span>
+        </div>
+        <div asp-validation-summary="All"></div>
+        <button type="submit" class="btn btn-primary" style="width:150px">Изменить</button>
+        <a asp-controller="UserOperatingSystem" asp-action="Index" class="btn btn-secondary" style="width:150px">Вернуться к списку</a>
+    </div>
+</form>

@@ -2,10 +2,6 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
 <div class="container">
     <div class="row">
         <div class="col-md-3">
@@ -21,18 +17,36 @@
         <div class="col-md-3">
             <div class="card mb-4">
                 <div class="card-body">
-                    <h5 class="card-title">Оргтехника</h5>
-                    <p class="card-text">Просмотр списка компьютерной техники и оргтехники</p>
-                    <a asp-controller="Home" asp-action="TechEquipmentList" class="btn btn-primary">Перейти</a>
+                    <h5 class="card-title">Должности</h5>
+                    <p class="card-text">Просмотр списка должностей в компании</p>
+                    <a asp-controller="Position" asp-action="Index" class="btn btn-primary">Перейти</a>
                 </div>
             </div>
         </div>
         <div class="col-md-3">
             <div class="card mb-4">
                 <div class="card-body">
-                    <h5 class="card-title">Подразделение</h5>
+                    <h5 class="card-title">Подразделения</h5>
                     <p class="card-text">Просмотр списка подразделений в компании</p>
                     <a asp-controller="Subdivision" asp-action="Index" class="btn btn-primary">Перейти</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Статистика</h5>
+                    <p class="card-text">Просмотр статистических данных о компании</p>
+                    <a asp-controller="Chart" asp-action="Index" class="btn btn-primary">Перейти</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Операционные системы</h5>
+                    <p class="card-text">Просмотр списка операционных систем</p>
+                    <a asp-controller="UserOperatingSystem" asp-action="Index" class="btn btn-primary">Перейти</a>
                 </div>
             </div>
         </div>

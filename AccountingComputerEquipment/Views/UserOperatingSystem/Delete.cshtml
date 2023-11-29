@@ -1,0 +1,17 @@
+﻿@model UserOperatingSystem
+
+<form method="post" asp-action="Delete">
+    <input asp-for="UserOperatingSystemId" hidden/>
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Удалить операционную систему</h2>
+            <hr />
+        </div>
+        <div class="mb-3">
+            <label asp-for="UserOperatingSystemName">Наименование операционной системы</label>
+            <input asp-for="UserOperatingSystemName" disabled class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-danger" style="width:150px">Удалить</button>
+        <a asp-controller="UserOperatingSystem" asp-action="Index" class="btn btn-secondary" style="width:150px">Вернуться к списку</a>
+    </div>
+</form>

@@ -2,7 +2,13 @@
 {
     public class Subdivision
     {
-        public int SubdivisionId { get; set; }
-        public string SubdivisionName { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+
+        public List<User> Users { get; set; }
+        public Subdivision()
+        {
+            Users = new List<User>();
+        }
     }
 }

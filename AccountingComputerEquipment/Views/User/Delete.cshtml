@@ -1,0 +1,121 @@
+﻿@model AccountingComputerEquipment.Models.EditUserViewModel
+
+<h3>Пользователь: @Model.User.FullName</h3>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card mb-6">
+                <div class="card-body">
+                    <h3 class="card-title text-center">
+                        Компьютер
+                    </h3>
+                    <p class="card-text">
+                        <h4>Название компьютера</h4>
+                        @Model.Computer.ComputerName
+                        <h4>Процессор</h4>
+                        @Model.Computer.CPU
+                        <h4>Видеокарта</h4>
+                        @Model.Computer.GPU
+                        <h4>Оперативная память</h4>
+                        @Model.Computer.RAM
+                        <h4>Материнская плата</h4>
+                        @Model.Computer.Motherboard
+                        <h4>Накопитель</h4>
+                        @Model.Computer.HDD
+                        <h4>Сетевая карта</h4>
+                        @Model.Computer.LANCard
+                        <h4>DVD</h4>
+                        @Model.Computer.DVD
+                        <h4>Блок питания</h4>
+                        @Model.Computer.PSU
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card mb-6">
+                <div class="card-body">
+                    <h3 class="card-title text-center">
+                        Информация о компьютере
+                    </h3>
+                    <p class="card-text">
+                        <h4>Имя комьютера</h4>
+                        @Model.Computer.ComputerName
+                        <h4>Имя пользователя</h4>
+                        @Model.Computer.UserSystemName
+                        <h4>IP компьютера</h4>
+                        @Model.Computer.ComputerIp
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card mb-6">
+                <div class="card-body">
+                    <h3 class="card-title text-center">
+                        Программное обеспечение
+                    </h3>
+                    <p class="card-text">
+                        @if(@Model.Computer.Softwares == null)
+                        {
+                            <p>Данные отсутствуют</p>
+                        }
+                        else
+                        {
+                            @Model.Computer.Softwares
+                            <br />
+                        }
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card mb-6">
+                <div class="card-body">
+                    <h3 class="card-title text-center">
+                        Операционная система
+                    </h3>
+                    <p class="card-text">
+                        @if (@Model.UserOperatingSystem.UserOperatingSystemId == null)
+                        {
+                            <p>Данные отсутствуют</p>
+                        }
+                        else
+                        {
+                            @Model.UserOperatingSystem.UserOperatingSystemName
+                        <br />
+
+                        }
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card mb-6">
+                <div class="card-body">
+                    <h3 class="card-title text-center">
+                        Принтер
+                    </h3>
+                    <p class="card-text">
+                            <h4>Имя принтер</h4>
+                            @Model.Computer.PrinterName
+                            <h4>Инвентарный номер</h4>
+                            @Model.Computer.PrinterInventoryNumber
+                            <h4>Серийный номер</h4>
+                            @Model.Computer.PrinterSerialNumber
+                            <h4>IP принетра</h4>
+                            @Model.Computer.PrinterIp
+                            <h5>Тип принтера</h5>
+                            @Model.Computer.PrinterType
+                            /*.ToFriendlyString()*/
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form method="post">
+        <button type="submit" class="btn btn-danger" style="width:150px">Удалить</button>
+    </form>
+    <a asp-controller="User" asp-action="Index" class="btn btn-secondary" style="width:150px">Вернуться к списку</a>
+</div>

@@ -20,7 +20,7 @@ namespace AccountingComputerEquipment.Controllers
         ////////////////////////////////////////////
         public IActionResult TechEquipmentList()
         {
-            return View("~/Views/Hardware/TechEquipmentList.cshtml");
+            return View("~/Views/Hardware/Index.cshtml");
         }
         ////////////////////////////////////////////
         public IActionResult Privacy()

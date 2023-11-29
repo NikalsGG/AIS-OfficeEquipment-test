@@ -1,103 +1,106 @@
 ﻿using AccountingComputerEquipment.Data;
 using AccountingComputerEquipment.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Identity.Client;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 
 namespace AccountingComputerEquipment.Controllers
 {
-    public class SubdivisionController : Controller
+    public class UserOperatingSystemController : Controller
     {
         private readonly ApplicationDbContext _db;
-        public SubdivisionController(ApplicationDbContext db)
+
+        public UserOperatingSystemController(ApplicationDbContext db)
         {
             _db = db;
         }
 
         public IActionResult Index()
         {
-            IEnumerable<Subdivision> objSubdevisionList = _db.Subdivisions;
-            return View(objSubdevisionList);
+            IEnumerable<UserOperatingSystem> objUserOSList = _db.UserOperatingSystems;
+            return View(objUserOSList);
         }
-        public IActionResult Create() // GET
+
+        public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Create(Subdivision subdivision) // POST
+        [AutoValidateAntiforgeryToken]
+        public IActionResult Create(UserOperatingSystem userOperatingSystem)
         {
             if (ModelState.IsValid)
             {
-                _db.Subdivisions.Add(subdivision);
+                _db.UserOperatingSystems.Add(userOperatingSystem);
                 _db.SaveChanges();
-                TempData["success"] = "Subdivision created successfully.";
                 return RedirectToAction("Index");
             }
-            return View(subdivision);
+            return View(userOperatingSystem);
         }
 
         [HttpGet]
         public IActionResult Edit(int? id)
         {
-            if(id == null || id == null)
+            if (id == null || id == 0)
             {
                 return NotFound();
             }
 
-            var subdivisionFromDb = _db.Subdivisions.Find(id);
+            var userOSFromDb = _db.UserOperatingSystems.Find(id);
 
-            if(subdivisionFromDb == null)
+            if (userOSFromDb == null)
             {
                 return NotFound();
             }
 
-            return View(subdivisionFromDb);
+            return View(userOSFromDb);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Subdivision subdivision)
+        public IActionResult Edit(UserOperatingSystem userOperatingSystem)
         {
-            if(ModelState.IsValid)
+            //var userOSFromDb = _db.UserOperatingSystems.Find(userOperatingSystem.UserOperatingSystemId);
+
+            if (ModelState.IsValid)
             {
-                _db.Subdivisions.Update(subdivision);
+                _db.UserOperatingSystems.Update(userOperatingSystem);
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(subdivision);
+            return View(userOperatingSystem);
         }
 
         [HttpGet]
         public IActionResult Delete(int? id)
         {
-            if(id == null || id == 0)
+            if (id == null || id == 0)
             {
                 return NotFound();
             }
 
-            var subdivisionFromDb = _db.Subdivisions.Find(id);
+            var userOSFromDb = _db.UserOperatingSystems.Find(id);
 
-            if(subdivisionFromDb == null)
+            if (userOSFromDb == null)
             {
                 return NotFound();
             }
 
-            return View(subdivisionFromDb);
+            return View(userOSFromDb);
         }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeletePOST(int? id)
         {
-            var obj = _db.Subdivisions.Find(id);
+            var obj = _db.UserOperatingSystems.Find(id);
 
-            if(obj == null)
+            if (obj == null)
             {
                 return NotFound();
             }
 
-            _db.Subdivisions.Remove(obj);
+            _db.UserOperatingSystems.Remove(obj);
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
