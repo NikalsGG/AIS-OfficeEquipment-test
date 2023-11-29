@@ -3,9 +3,6 @@ using AccountingComputerEquipment.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System.Reflection;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace AccountingComputerEquipment.Controllers
 {
@@ -167,7 +164,7 @@ namespace AccountingComputerEquipment.Controllers
             //    db.SaveChanges();
             //}
         }
-        public ActionResult Index(int? company, int? position, /*int?branch,*/ string name)
+        public ActionResult Index(int? company, int? position, string name)
         {
             IQueryable<User> users = db.Users.Include(p => p.Subdivision).Include(p => p.Position)/*.Include(p => p.Branch)*//*.Include(p => p.Computer)*/;
             
@@ -212,27 +209,24 @@ namespace AccountingComputerEquipment.Controllers
             SelectList subdivisions = new SelectList(db.Subdivisions, "Id", "Name");
             SelectList positions = new SelectList(db.Positions, "Id", "PositionName");
             SelectList userOperatingSystems = new SelectList(db.UserOperatingSystems, "UserOperatingSystemId", "UserOperatingSystemName");
-            //SelectList branchs = new SelectList(db.Branches, "BranchId", "BranchName");
 
             ViewBag.Subdivisions = subdivisions;
             ViewBag.Positions = positions;
             ViewBag.UserOperatingSystems = userOperatingSystems;
-            //ViewBag.Branchs = branchs;
             
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(User user, Computer computer) //(User user)
+        public IActionResult Create(User user, Computer computer)
         {
             db.Users.Add(user);
             db.SaveChanges();
 
             computer.UserId = user.UserId;
-            db.Computers.Add(computer); //(user)
+            db.Computers.Add(computer); 
             db.SaveChanges();
-            //TempData["success"] = "User created successfully.";
             return RedirectToAction("Index");
         }
 
@@ -244,12 +238,12 @@ namespace AccountingComputerEquipment.Controllers
                 return NotFound();
             }
 
-            // Находим в бд футболиста
             User user = db.Users
                 .Include(u => u.Computers)
+                .Include(u => u.Position)
+                .Include(u => u.Subdivision)
                 .FirstOrDefault(u => u.UserId == itemId);
 
-            //Computer computer = user?.Computers.FirstOrDefault();
 
             if (user != null)
             {
@@ -257,43 +251,30 @@ namespace AccountingComputerEquipment.Controllers
                 {
                     User = user,
                     Computer = user.Computers.FirstOrDefault(),
-                    Positions = new SelectList(db.Positions, "Id", "PositionName"), // Замените на свои реальные названия свойств
-                    Subdivisions = new SelectList(db.Subdivisions, "Id", "Name"), // То же самое здесь
                 };
 
-                ViewBag.Positions = viewModel.Positions;
-                ViewBag.Subdivisions = viewModel.Subdivisions;
+                SelectList subdivisions = new SelectList(db.Subdivisions, "Id", "Name");
+                SelectList positions = new SelectList(db.Positions, "Id", "PositionName");
+                SelectList userOperatingSystems = new SelectList(db.UserOperatingSystems, "UserOperatingSystemId", "UserOperatingSystemName");
 
-                //// Создаем список команд для передачи в представление
-                //SelectList subdivisions = new SelectList(db.Subdivisions, "Id", "Name"/*, user.SubdivisionId*/);
-                //SelectList positions = new SelectList(db.Positions, "Id", "PositionName"/*, user.PositionId*/);
-                //SelectList userOperatingSystems = new SelectList(db.UserOperatingSystems, "UserOperatingSystemId", "UserOperatingSystemName");
-                ////SelectList branchs = new SelectList(db.Branches, "BranchId", "BranchName", user.BranchId);
-                //ViewBag.Subdivisions = subdivisions as IEnumerable<SelectListItem>;
-                //ViewBag.Positions = positions;
-                //ViewBag.UserOperatingSystems = userOperatingSystems;
-                ////ViewBag.Branchs = branchs;
-                return View(viewModel); /*user*/
+                ViewBag.Subdivisions = subdivisions;
+                ViewBag.Positions = positions;
+                ViewBag.UserOperatingSystems = userOperatingSystems;
+
+                return View(viewModel);
             }
             return RedirectToAction("Index");
         }
-
-
         [HttpPost]
         public IActionResult Edit(EditUserViewModel editedModel)
         {
-            if (ModelState.IsValid)
-            {
-                // Применяем изменения в базе данных
-                db.Update(editedModel.User);
-                db.Update(editedModel.Computer);
-                db.SaveChanges();
+            db.Users.Update(editedModel.User);
 
-                return RedirectToAction("Index"); // Перенаправляем пользователя после успешного редактирования
-            }
-
-            // Если ModelState не прошел валидацию, возвращаем пользователя на страницу редактирования с ошибками
-            return View(editedModel);
+            editedModel.Computer.UserId = editedModel.User.UserId;
+            db.Computers.Update(editedModel.Computer); 
+            db.SaveChanges();
+            
+            return RedirectToAction("Index");
         }
 
 
@@ -362,7 +343,6 @@ namespace AccountingComputerEquipment.Controllers
                 {
                     User = userFromDb,
                     Computer = computerFromDb,
-                    UserOperatingSystem = userOperatingSystemFromDb
                 };
 
                 return View(viewModel);
@@ -372,7 +352,7 @@ namespace AccountingComputerEquipment.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult DeletePOST(int? itemId/*, int? duraBlyat*/)
+        public IActionResult DeletePOST(int? itemId)
         {
             User userFromDb = db.Users.Find(itemId);
             Computer computerFromDb = db.Computers.Find(userFromDb.UserId);

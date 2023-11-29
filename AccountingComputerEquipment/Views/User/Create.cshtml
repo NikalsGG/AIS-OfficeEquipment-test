@@ -1,8 +1,7 @@
-﻿@*@model AccountingComputerEquipment.Models.User*@
-@model AccountingComputerEquipment.Models.CreateUserViewModel
+﻿@model AccountingComputerEquipment.Models.CreateUserViewModel
 
 @{
-    ViewBag.Title = "Добавление пользователя";
+    ViewBag.Title = "Добавлени пользователя";
 }
 
 <style>
@@ -28,6 +27,8 @@
     <fieldset>
         <legend>Пользователь</legend>
 
+        
+    @*Пользовтель*@
         <div class="form-columns">
             <div class="form-column">
                 <p>
@@ -63,68 +64,69 @@
         <legend>Компьютер</legend>
 
         <div class="form-columns">
+            
+    @*Компьютер*@
             <div class="form-column">
                 <p>
-                    Инв. номер компьютера<br />
+                    Инв. номер компьютера<br/>
                     @Html.EditorFor(model => model.Computer.ComputerInventoryNumber)
                 </p>
                 <p>
-                    Сер. номер компьютера<br />
+                    Сер. номер компьютера<br/>
                     @Html.EditorFor(model => model.Computer.ComputerSerialNumber)
                 </p>
                 <p>
-                    Имя комьютера <br />
+                    Имя комьютера <br/>
                     @Html.EditorFor(model => model.Computer.ComputerName)
                 </p>
                 <p>
-                    Имя пользователя<br />
+                    Имя пользователя<br/>
                     @Html.EditorFor(model => model.Computer.UserSystemName)
                 </p>
                 <p>
-                    IP компьютера <br />
+                    IP компьютера <br/>
                     @Html.EditorFor(model => model.Computer.ComputerIp)
                 </p>
                 <p>
-                    Процессор <br />
+                    Процессор <br/>
                     @Html.EditorFor(model => model.Computer.CPU)
                 </p>
                 <p>
-                    Видеокарта <br />
+                    Видеокарта <br/>
                     @Html.EditorFor(model => model.Computer.GPU)
                 </p>
                 <p>
-                    ОЗУ <br />
+                    ОЗУ <br/>
                     @Html.EditorFor(model => model.Computer.RAM)
                 </p>
-                        <!-- Add other fields for this section -->
-                    </div>
+            </div>
             <div class="form-column">
-                    <p>
-                    Материнская плата<br />
+                <p>
+                    Материнская плата<br/>
                     @Html.EditorFor(model => model.Computer.Motherboard)
                 </p>
                 <p>
-                    Жёсткий диск<br />
+                    Жёсткий диск<br/>
                     @Html.EditorFor(model => model.Computer.HDD)
                 </p>
                 <p>
-                    Сетевая карта<br />
+                    Сетевая карта<br/>
                     @Html.EditorFor(model => model.Computer.LANCard)
                 </p>
                 <p>
-                    DVD<br />
+                    DVD<br/>
                     @Html.EditorFor(model => model.Computer.DVD)
                 </p>
                 <p>
-                    Блок питания<br />
+                    Блок питания<br/>
                     @Html.EditorFor(model => model.Computer.PSU)
                 </p>
                 <p>
-                    ОС<br />
+                    ОС<br/>
                     @Html.DropDownListFor(model => model.Computer.UserOperatingSystemId, ViewBag.UserOperatingSystems as SelectList)
                 </p>
                 <p>
-                    Приложения<br />
+                    Приложения<br/>
                     @Html.EditorFor(model => model.Computer.Softwares)
                 </p>
             </div>
@@ -133,59 +135,62 @@
         <div class="form-separator"></div>
 
         <div class="form-columns">
+            
+    @*Принтер*@
             <div class="form-column">
                 <h3>Принтер</h3>
                 <p>
-                    Инв. номер принтера<br />
+                    Инв. номер принтера<br/>
                     @Html.EditorFor(model => model.Computer.PrinterInventoryNumber)
                 </p>
                 <p>
-                    Сер. номер принтера<br />
+                    Сер. номер принтера<br/>
                     @Html.EditorFor(model => model.Computer.PrinterSerialNumber)
                 </p>
                 <p>
-                    Имя принтера<br />
+                    Имя принтера<br/>
                     @Html.EditorFor(model => model.Computer.PrinterName)
                 </p>
                 <p>
-                    IP принтера<br />
+                    IP принтера<br/>
                     @Html.EditorFor(model => model.Computer.PrinterIp)
                 </p>
                 <p>
-                    Тип принтера<br /> @*Сделай выпадающий список*@
+                    Тип принтера<br/>
                     @Html.EditorFor(model => model.Computer.PrinterType)
-                    @*@Html.DropDownListFor(model => model.Computer., ViewBag.Subdivisions as SelectList)*@
                 </p>
-                <!-- Add other fields for this section -->
             </div>
+
+            @*Монитор*@
             <div class="form-column">
                 <h3>Монитор</h3>
                 <p>
-                    Инв. номер монитора<br />
+                    Инв. номер монитора<br/>
                     @Html.EditorFor(model => model.Computer.PCMonitorInventoryNumber)
                 </p>
                 <p>
-                    Сер. номер монитора<br />
+                    Сер. номер монитора<br/>
                     @Html.EditorFor(model => model.Computer.PCMonitorSerialNumber)
                 </p>
                 <p>
-                    Имя монитора<br />
+                    Имя монитора<br/>
                     @Html.EditorFor(model => model.Computer.PCMonitorName)
                 </p>
-                <!-- Add other fields for this section -->
             </div>
+
+            @*Планшет*@
             <div class="form-column">
                 <h3>Планшет</h3>
                 <p>
-                    Инв. номер планшета<br />
+                    Инв. номер планшета<br/>
                     @Html.EditorFor(model => model.Computer.TabletInventoryNumber)
                 </p>
                 <p>
-                    Сер. номер планшета<br />
+                    Сер. номер планшета<br/>
                     @Html.EditorFor(model => model.Computer.TabletSerialNumber)
                 </p>
                 <p>
-                    Имя планшета<br />
+                    Имя планшета<br/>
                     @Html.EditorFor(model => model.Computer.TabletName)
                 </p>
             </div>
